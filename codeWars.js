@@ -241,20 +241,24 @@ function bouncingBall(h, bounce, window) {
 function solution(input, markers) {
     let mas = input.split("");
     let index;
+    let str;
     for (let i = 0; i < mas.length; i++) {
         for (let j = 0; j < markers.length; j++) {
             if (mas[i] === markers[j]) {
-                index=mas.indexOf('/',i);
-                
+                index = mas.indexOf('\n', i);
+                mas = mas.splice(i, index);
             }
         }
     }
+    str = mas.join("");
+    return str;
+
 };
 
 //check
 function init() {
     console.log(validParentheses("f)("));
-    console.log();
+    console.log(solution("apples, plums % and bananas\npears\noranges !applesauce", ["%", "!"]));
 }
 
 window.onload = init;
