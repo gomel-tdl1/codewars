@@ -239,26 +239,104 @@ function bouncingBall(h, bounce, window) {
 }
 
 function solution(input, markers) {
-    let mas = input.split("");
-    let index;
-    let str;
-    for (let i = 0; i < mas.length; i++) {
-        for (let j = 0; j < markers.length; j++) {
-            if (mas[i] === markers[j]) {
-                index = mas.indexOf('\n', i);
-                mas = mas.splice(i, index);
+    let mas = input.split('\n');
+    let index, correct;
+    let result = mas.map(function (item) {
+        console.log(typeof item);
+        outer: for (let i = 0; i < markers.length; i++) {
+            index = item.indexOf(markers[i]);
+            if (index >= 0) {
+                correct = item.slice(0, index - 1);
+                break outer;
+            } else {
+                correct = item;
             }
         }
-    }
-    str = mas.join("");
-    return str;
-
+        return correct;
+    });
+    result = result.join('\n');
+    return result;
 };
 
-//check
-function init() {
-    console.log(validParentheses("f)("));
-    console.log(solution("apples, plums % and bananas\npears\noranges !applesauce", ["%", "!"]));
+//-----------------------------------------------------------------------------------------
+function zero() {
 }
 
-window.onload = init;
+function one() {
+}
+
+function two() {
+}
+
+function three() {
+}
+
+function four() {
+}
+
+function five() {
+}
+
+function six() {
+}
+
+function seven() {
+}
+
+function eight() {
+}
+
+function nine() {
+}
+
+function plus() {
+}
+
+function minus() {
+}
+
+function times() {
+}
+
+function dividedBy() {
+}
+
+//-----------------------------------------------------------------------------------------
+function snail(array) {
+    let snailArr = [];
+    for (let i = 0; i < Math.floor((array.length + 1) / 2); i++) {
+        let curLine = array[i].slice(i, array.length - i);
+        let bottomLine = array[array.length - i - 1].slice(i, array.length - i).reverse();
+        snailArr = snailArr.concat(curLine);
+        for (let j = i + 1; j < array.length - 1 - i; j++) {
+            snailArr.push(array[j][array.length - 1 - i]);
+        }
+        snailArr = i === array.length - 1 - i ? snailArr.concat([]) : snailArr.concat(bottomLine);
+        for (let k = array.length - 2 - i; k >= i + 1; k--) {
+            snailArr.push(array[k][i]);
+        }
+    }
+    return snailArr;
+}
+
+function sumIntervals(intervals) {
+    console.log(intervals);
+    return intervals.reduce((sum, interval, index) => {
+        for (let mas of intervals) {
+            if (index === 0 || interval[0] < mas[0] || interval[0] > mas[1]) {
+                return sum + (interval[1] - interval[0]);
+            } else if (interval[1] !== mas[1] && interval[0] >= mas[0] && interval[0] <= mas[1]) {
+                return sum + (interval[1] - mas[1]);
+            } else if((interval[0] >= mas[0] && interval[0] <= mas[1])&&(interval[1] >= mas[0] && interval[1] <= mas[1])){
+                return sum;
+            }else{
+                return sum;
+            }
+        }
+    }, 0);
+}
+
+//check
+window.onload = function () {
+    console.log(solution("apples, plums % and bananas\npears\noranges !applesauce", ["%", "!"]));
+};
