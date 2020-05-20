@@ -1,34 +1,16 @@
 'use strict';
-window.onload =()=>{
-    perebor();
+
+window.onload=()=>{
+    let intervalId=setInterval(sayHi,3000);
+    console.log(intervalId);
+    setTimeout(()=>clearInterval(intervalId),9000);
 };
 
-function perebor() {
-    let range = {
-        from: 1,
-        to: 5,
-
-        [Symbol.iterator]() {
-            this.current = this.from;
-            return this;
-        },
-
-        next() {
-            if (this.current <= this.to) {
-                return { done: false, value: this.current++ };
-            } else {
-                return { done: true };
-            }
-        }
-    };
-
-    // for (let num of range) {
-    //     alert(num); // 1, затем 2, 3, 4, 5
-    // }
-    let arr=Array.from(range);
-    let str=arr.toString();
-    console.log(str);
-};
-
-
-
+function sayHi() {
+    console.log('Hi');
+    for(let i=0.5;i<=3;i=i+0.5){
+        setTimeout(()=>{
+            console.log(i);
+        },500);
+    }
+}

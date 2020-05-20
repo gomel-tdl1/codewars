@@ -1,3 +1,5 @@
+'use strict'
+
 //first
 function tickets(peopleInLine) {
     let y = "YES";
@@ -321,22 +323,107 @@ function snail(array) {
 
 function sumIntervals(intervals) {
     console.log(intervals);
-    return intervals.reduce((sum, interval, index) => {
-        for (let mas of intervals) {
-            if (index === 0 || interval[0] < mas[0] || interval[0] > mas[1]) {
-                return sum + (interval[1] - interval[0]);
-            } else if (interval[1] !== mas[1] && interval[0] >= mas[0] && interval[0] <= mas[1]) {
-                return sum + (interval[1] - mas[1]);
-            } else if((interval[0] >= mas[0] && interval[0] <= mas[1])&&(interval[1] >= mas[0] && interval[1] <= mas[1])){
-                return sum;
-            }else{
-                return sum;
-            }
+    let set = new Set();
+    intervals.forEach((interval) => {
+        for (let i = interval[0]; i <= interval[1]; i++) {
+            set.add(i);
         }
-    }, 0);
+    });
+    return set.size;
 }
+
+//-----------------------------------------------------------------------------------------------------------
+
+function recoverSecret(triplets) {
+    let result = '';
+    while (triplets.some(triplet => triplet.some(char => !result.includes(char)))) {
+        let nextChar = getNextChar(triplets);
+        nextChar = getNextChar(triplets, nextChar);
+        result += nextChar;
+        triplets = triplets.map(triplet => triplet.filter(char => char !== nextChar));
+        nextChar = '';
+    }
+    return result;
+}
+
+function getNextChar(triplets, nextChar = '') {
+    triplets.forEach((triplet) => {
+        if (triplet.length !== 0 && ((triplet.find(char => nextChar === char) && triplet[0] != nextChar) || !nextChar)) {
+            nextChar = triplet[0];
+        }
+    });
+    return nextChar;
+}
+
+//----------------------------------------------------------------------------------
+
+function snail(column, day, night) {
+    let high = 0;
+    let count = 0;
+    while (true) {
+        high += day;
+        count++;
+        if (high < column) {
+            high -= night;
+        } else {
+            break;
+        }
+    }
+    return count;
+}
+
+//------------------------------------------------------------------------------
+
+function decodeBits(bits) {
+    // Trim zeros
+    bits = bits.replace(/(^0+|0+$)/g, '')
+
+    // Find transmission rate
+    let rate = Math.min.apply(null, bits.match(/0+|1+/g).map(function(b) { return b.length }));
+
+    // Convert to morse code
+    bits = bits
+        .replace(new RegExp('(?:111){' + rate + '}(?:0{' + rate + '}|$)', 'g'), '-')
+        .replace(new RegExp('1{' + rate + '}(?:0{' + rate + '}|$)', 'g'), '.')
+        .replace(new RegExp('(?:000000){' + rate + '}', 'g'), '   ')
+        .replace(new RegExp('(?:00){' + rate + '}', 'g'), ' ');
+
+    return bits
+}
+
+function decodeMorse(message) {
+    return message
+        .replace(/   /g, ' _ ')
+        .split(' ')
+        .map(function(letter) { return letter === '_' ? ' ' : MORSE_CODE[letter] })
+        .join('')
+}
+
+//----------------------------------------------------------------------------------------------
+Array.prototype.sameStructureAs = function (other) {
+    console.log(this);
+    console.log(other);
+    if (!(Array.isArray(this) && Array.isArray(other))) {
+        return false;
+    } else if (!this.map(item => typeof item).includes('object')) {
+        let first = JSON.stringify(this).split(',').map(() => '*').join('');
+        let second = JSON.stringify(other).split(',').map(() => '*').join('');
+        return (first === second) ? true : false;
+    } else {
+        let mainString = JSON.stringify(this).replace(/\d/g, '*');
+        let secondaryString = JSON.stringify(other).replace(/\d/g, '*');
+        console.log(mainString);
+        console.log(secondaryString);
+        return (mainString === secondaryString) ? true : false;
+    }
+};
+//---------------------------------------------------------------------------------------------
+
+
+
+//---------------------------------------------------------------------------------------------
 
 //check
 window.onload = function () {
-    console.log(solution("apples, plums % and bananas\npears\noranges !applesauce", ["%", "!"]));
+    console.log(decodeMorse(decodeBits('1100110011001100000011000000111111001100111111001111110000000000000011001111110011111100111111000000110011001111110000001111110011001100000011')));
 };
