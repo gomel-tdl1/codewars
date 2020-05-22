@@ -1,16 +1,19 @@
 'use strict';
 
-window.onload=()=>{
-    let intervalId=setInterval(sayHi,3000);
-    console.log(intervalId);
-    setTimeout(()=>clearInterval(intervalId),9000);
-};
-
-function sayHi() {
-    console.log('Hi');
-    for(let i=0.5;i<=3;i=i+0.5){
-        setTimeout(()=>{
-            console.log(i);
-        },500);
-    }
+function printNumbers(from, to) {
+    let first=from;
+    let timer = function(sec){
+        if (first <= sec) {
+            console.log(first++);
+        } else {
+            clearInterval(timerId);
+        }
+    };
+    let timerId = setTimeout(function rec() {
+        timer(to);
+        setTimeout(rec,1000);
+    }, 1000);
+    console.log(timerId);
 }
+printNumbers(1,8);
+
