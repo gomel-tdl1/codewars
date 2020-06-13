@@ -1,19 +1,13 @@
 'use strict';
 
-function printNumbers(from, to) {
-    let first=from;
-    let timer = function(sec){
-        if (first <= sec) {
-            console.log(first++);
-        } else {
-            clearInterval(timerId);
-        }
-    };
-    let timerId = setTimeout(function rec() {
-        timer(to);
-        setTimeout(rec,1000);
-    }, 1000);
-    console.log(timerId);
+function loadScript(src, callback) {
+    let script = document.createElement('script');
+    script.src = src;
+    script.onload = () => callback(script);
+    document.head.append(script);
 }
-printNumbers(1,8);
 
+loadScript('https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js', script => {
+    alert(`Здорово, скрипт ${script.src} загрузился`);
+    alert( _ ); // функция, объявленная в загруженном скрипте
+});

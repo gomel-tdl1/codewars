@@ -240,68 +240,42 @@ function bouncingBall(h, bounce, window) {
     }
 }
 
-function solution(input, markers) {
-    let mas = input.split('\n');
-    let index, correct;
-    let result = mas.map(function (item) {
-        console.log(typeof item);
-        outer: for (let i = 0; i < markers.length; i++) {
-            index = item.indexOf(markers[i]);
-            if (index >= 0) {
-                correct = item.slice(0, index - 1);
-                break outer;
-            } else {
-                correct = item;
-            }
-        }
-        return correct;
-    });
-    result = result.join('\n');
-    return result;
-};
+// function solution(input, markers) {
+//     let mas = input.split('\n');
+//     let index, correct;
+//     let result = mas.map(function (item) {
+//         console.log(typeof item);
+//         outer: for (let i = 0; i < markers.length; i++) {
+//             index = item.indexOf(markers[i]);
+//             if (index >= 0) {
+//                 correct = item.slice(0, index - 1);
+//                 break outer;
+//             } else {
+//                 correct = item;
+//             }
+//         }
+//         return correct;
+//     });
+//     result = result.join('\n');
+//     return result;
+// };
 
 //-----------------------------------------------------------------------------------------
-function zero() {
-}
+function zero(func)   { return func ? func(0) : 0; }
+function one(func)    { return func ? func(1) : 1; }
+function two(func)    { return func ? func(2) : 2; }
+function three(func)  { return func ? func(3) : 3; }
+function four(func)   { return func ? func(4) : 4; }
+function five(func)   { return func ? func(5) : 5; }
+function six(func)    { return func ? func(6) : 6; }
+function seven(func)  { return func ? func(7) : 7; }
+function eight(func)  { return func ? func(8) : 8; }
+function nine(func)   { return func ? func(9) : 9; }
 
-function one() {
-}
-
-function two() {
-}
-
-function three() {
-}
-
-function four() {
-}
-
-function five() {
-}
-
-function six() {
-}
-
-function seven() {
-}
-
-function eight() {
-}
-
-function nine() {
-}
-
-function plus() {
-}
-
-function minus() {
-}
-
-function times() {
-}
-
-function dividedBy() {
-}
+function plus( b )      { return function( a ) { return a + b; }; }
+function minus( b )     { return function( a ) { return a - b; }; }
+function times( b )     { return function( a ) { return a * b; }; }
+function dividedBy( b ) { return function( a ) { return a / b; }; }
 
 //-----------------------------------------------------------------------------------------
 function snail(array) {
@@ -379,7 +353,9 @@ function decodeBits(bits) {
     bits = bits.replace(/(^0+|0+$)/g, '')
 
     // Find transmission rate
-    let rate = Math.min.apply(null, bits.match(/0+|1+/g).map(function(b) { return b.length }));
+    let rate = Math.min.apply(null, bits.match(/0+|1+/g).map(function (b) {
+        return b.length
+    }));
 
     // Convert to morse code
     bits = bits
@@ -395,7 +371,9 @@ function decodeMorse(message) {
     return message
         .replace(/   /g, ' _ ')
         .split(' ')
-        .map(function(letter) { return letter === '_' ? ' ' : MORSE_CODE[letter] })
+        .map(function (letter) {
+            return letter === '_' ? ' ' : MORSE_CODE[letter]
+        })
         .join('')
 }
 
@@ -417,13 +395,45 @@ Array.prototype.sameStructureAs = function (other) {
         return (mainString === secondaryString) ? true : false;
     }
 };
-//---------------------------------------------------------------------------------------------
-
-
 
 //---------------------------------------------------------------------------------------------
+function pushing(round, result) {
+    if (round.length === 2) {
+        result.push(`${round.shift()},${round.pop()}`);
+    } else if (round.length > 1) {
+        result.push(`${round.shift()}-${round.pop()}`);
+    } else {
+        result.push(round[0]);
+    }
+}
 
+function solution(list) {
+    let prev = 0;
+    let round = [];
+    let result = [];
+    list.forEach((item, index) => {
+        if (index === 0) {
+            round.push(item);
+            prev = item;
+        } else {
+            if (item === prev + 1) {
+                round.push(item);
+            } else {
+                pushing(round, result);
+                round = [];
+                round.push(item);
+            }
+            prev = item;
+            if (index === list.length - 1) pushing(round, result);
+        }
+    });
+    return result.join();
+}
+
+//---------------------------------------------------------------------------------------------
+let multipleOf3Regex = /\n\n\n/;
+//---------------------------------------------------------------------------------------------
 //check
 window.onload = function () {
-    console.log(decodeMorse(decodeBits('1100110011001100000011000000111111001100111111001111110000000000000011001111110011111100111111000000110011001111110000001111110011001100000011')));
+    console.log(solution([-6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20]));
 };
