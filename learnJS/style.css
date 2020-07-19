@@ -1,0 +1,18 @@
+.forQuestion{
+    font-size: 14px;
+    text-align: center;
+    background: repeating-linear-gradient(lemonchiffon,rosybrown,wheat);
+}
+.niceText{
+    font-size: 17px;
+    color: darkblue;
+    font-family: 'Times New Roman', fantasy;
+}
+img{
+    height: 400px;
+}
+#test{
+    height: 30px;
+    width: 20px;
+    background: crimson;
+}

@@ -261,21 +261,69 @@ function bouncingBall(h, bounce, window) {
 // };
 
 //-----------------------------------------------------------------------------------------
-function zero(func)   { return func ? func(0) : 0; }
-function one(func)    { return func ? func(1) : 1; }
-function two(func)    { return func ? func(2) : 2; }
-function three(func)  { return func ? func(3) : 3; }
-function four(func)   { return func ? func(4) : 4; }
-function five(func)   { return func ? func(5) : 5; }
-function six(func)    { return func ? func(6) : 6; }
-function seven(func)  { return func ? func(7) : 7; }
-function eight(func)  { return func ? func(8) : 8; }
-function nine(func)   { return func ? func(9) : 9; }
+function zero(func) {
+    return func ? func(0) : 0;
+}
 
-function plus( b )      { return function( a ) { return a + b; }; }
-function minus( b )     { return function( a ) { return a - b; }; }
-function times( b )     { return function( a ) { return a * b; }; }
-function dividedBy( b ) { return function( a ) { return a / b; }; }
+function one(func) {
+    return func ? func(1) : 1;
+}
+
+function two(func) {
+    return func ? func(2) : 2;
+}
+
+function three(func) {
+    return func ? func(3) : 3;
+}
+
+function four(func) {
+    return func ? func(4) : 4;
+}
+
+function five(func) {
+    return func ? func(5) : 5;
+}
+
+function six(func) {
+    return func ? func(6) : 6;
+}
+
+function seven(func) {
+    return func ? func(7) : 7;
+}
+
+function eight(func) {
+    return func ? func(8) : 8;
+}
+
+function nine(func) {
+    return func ? func(9) : 9;
+}
+
+function plus(b) {
+    return function (a) {
+        return a + b;
+    };
+}
+
+function minus(b) {
+    return function (a) {
+        return a - b;
+    };
+}
+
+function times(b) {
+    return function (a) {
+        return a * b;
+    };
+}
+
+function dividedBy(b) {
+    return function (a) {
+        return a / b;
+    };
+}
 
 //-----------------------------------------------------------------------------------------
 function snail(array) {
@@ -431,9 +479,19 @@ function solution(list) {
 }
 
 //---------------------------------------------------------------------------------------------
-let multipleOf3Regex = /\n\n\n/;
+
+
 //---------------------------------------------------------------------------------------------
 //check
-window.onload = function () {
-    console.log(solution([-6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20]));
-};
+// window.onload = function () {
+//     let alphabet = 'abcdefghijklmnopqrstuvwxyz';
+//     let key = 'password';
+//
+// // creates a cipher helper with each letter substituted
+// // by the corresponding character in the key
+//     let c = new VigenereCipher(key, alphabet);
+//
+//     c.encode('codewars'); // returns 'rovwsoiv'
+//     c.decode('laxxhsj');  // returns 'waffles'
+//     console.log();
+// };

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learn.JavaScript</title>
+    <style>@import "style.css";</style>
+    <script src="learnJS.js"></script>
+</head>
+<body class="forQuestion">
+    <div>
+        <div>
+            <p class="niceText">Каков размер 1 гигабайта?</p>
+            <input type="radio" name="q1" value="1000">1000
+            <br>
+            <input type="radio" name="q1" value="1100">1100
+            <br>
+            <input type="radio" name="q1" value="1024">1024
+            <br>
+            <input type="radio" name="q1" value="900">900
+        </div>
+        <div>
+            <p class="niceText">Сколько ног у паука?</p>
+            <input type="radio" name="q2" value="4">4
+            <br>
+            <input type="radio" name="q2" value="8">8
+            <br>
+            <input type="radio" name="q2" value="5">5
+            <br>
+            <input type="radio" name="q2" value="7">7
+        </div>
+        <div>
+            <p class="niceText">Как зовут Пушкина?</p>
+            <input type="radio" name="q3" value="Серега">Серега
+            <br>
+            <input type="radio" name="q3" value="Алексей">Алексей
+            <br>
+            <input type="radio" name="q3" value="Олег">Олег
+            <br>
+            <input type="radio" name="q3" value="Саня">Саня
+        </div>
+        <div>
+            <br>
+            <button onclick="testByIlya()">Проверить результаты.</button>
+            <div id="results"></div>
+        </div>
+        <div>
+            <button onclick="window.location.reload()">Стереть все.</button>
+        </div>
+    </div>
+    <div>
+        <p>Select fruit.</p>
+        <select name="" id="selectFruit" onchange="fruitSelect()">
+            <option value="">Apple</option>
+            <option value="">PineApple</option>
+            <option value="">Kiwi</option>
+            <option value="">Banana</option>
+        </select>
+        <p></p>
+        <div>
+            <button onclick="enterFruitImage()">Show image</button>
+        </div>
+        <br>
+        <div id="imageArea"></div>
+    </div>
+    <div>
+        <input type="range" id="range" min="0" max="100" step="2" oninput="inputRange()">
+        <p id="one"></p>
+        <div id="test"></div>
+    </div>
+</body>
+</html>
